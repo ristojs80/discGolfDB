@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Game{% endblock %}
+{% block content %}
+<!--
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+</style> -->
+<h2>Scores</h2>
+<table id="scoreTable">
+    <tr>
+        {% for z in headers %}
+        <th> {{ z }} </th>
+        {% endfor %} 
+    </tr>
+     {% for x in table %}
+    <tr>
+        {% for y in x %}
+        <td>{{ y }}</td>
+    {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+<script>
+    countScores();
+</script>
+{% endblock %}

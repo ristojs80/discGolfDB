@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Game{% endblock %}
+
+{% block content %}
+
+<h3>Select course</h3>
+<div id="select_container"></div>
+<button type="button" id="button1" class="btn btn-primary">Submit</button>
+<table id="data" class="display" style="width:100%">
+    <thead>
+       <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Holenumber</th>
+            <th>Par</th>
+            <th>Length</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Holenumber</th>
+            <th>Par</th>
+            <th>Length</th>
+        </tr>
+    </tfoot>
+</table>
+<script>
+    $(document).ready(function () {
+
+       
+        
+        var button1 = document.getElementById("button1");
+        button1.addEventListener("click", () => {
+        var sc = document.getElementById("select_container")
+        console.log(sc)
+        });
+        
+
+        
+       $('#data').DataTable({
+        "ajax": '/api/courses?id=3',
+        responsive: true,
+        searching: false,
+        columnDefs: [{ targets: [0, 1], visible: true }]
+        });
+
+
+        $.getJSON('/api/name', function (data) {
+            console.log(data)
+            getSelectData(data);
+        });
+
+
+        function getSelectData(json) {
+        var select = $("<select></select>").attr("id", "select_container").attr("name", "name");
+        $.each(json, function (index, json) {
+            
+            select.append($("<option></option>").attr("id", json.id).text(json.name));
+        });
+            $("#select_container").html(select);
+       
+    }
+       
+    });
+
+   
+
+</script>
+{% endblock %}
