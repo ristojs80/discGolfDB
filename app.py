@@ -43,7 +43,9 @@ def index():
 
 @app.route("/game")
 def game():
-    """Gets and format data for game scores table"""
+    """
+    Gets and format data for game scores table
+    """
     game = db_getGameData()
 
     headers = ["Holenumber", "Lenght", "Par"]
@@ -54,7 +56,7 @@ def game():
 
     gameData = []
     gameData.append([])
-    skip = False    #Holenumber, par and length are needed only one time per hole.  
+    skip = False  # Holenumber, par and length are needed only one time per hole.
     tmp = 1
     y = 0
     for i in game:
@@ -78,8 +80,10 @@ def game():
 
 
 @app.route("/api/name", methods=["GET"])
-""" Returns course names and id's in JSON format"""
 def api_select():
+    """
+    Returns course names and id's in JSON format
+    """
     name = db_getName()
     objects_list = []
     for row in name:
@@ -93,8 +97,10 @@ def api_select():
 
 
 @app.route("/api/courses", methods=["GET"])
-""" Returns data from courses for datatable"""
 def api_id():
+    """
+    Returns data from courses for datatable
+    """
     results = []
     if "id" in request.args:
         id = int(request.args["id"])
